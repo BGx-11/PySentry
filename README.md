@@ -5,7 +5,7 @@
 ![Status](https://img.shields.io/badge/Status-Active-success)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-lightgrey)
 
-**PySentry** is a lightweight, heuristic-based Intrusion Detection System (IDS) written in Python. Unlike traditional antiviruses that look for specific file signatures, PySentry analyzes **process behavior** in real-time to identify potential threats like keyloggers, reverse shells, and spyware.
+**PySentry** is a lightweight, heuristic-based Intrusion Detection System (IDS) written in Python. Unlike traditional antiviruses that rely on static signatures, PySentry analyzes **process behavior in real time** to identify potential threats such as keyloggers, reverse shells, and spyware.
 
 ---
 
@@ -23,113 +23,116 @@
 
 ## 🚀 Features
 
-* **🕵️ Heuristic Analysis:** Detects threats based on behavior (e.g., a Python script running in the background and connecting to the internet).
-* **🛡️ Smart Whitelisting:** Automatically ignores safe system processes and developer tools (VS Code, NVIDIA, Spotify, etc.) to prevent false alarms.
-* **📡 Network Monitoring:** Specifically watches for `inet` (Internet) socket connections initiated by background processes.
-* **🛑 Integrated Kill Switch:** Allows the user to terminate suspicious processes immediately from the dashboard.
-* **💻 Dashboard UI:** A clean, color-coded terminal interface for real-time monitoring.
+- **🕵️ Heuristic Analysis**  
+  Detects threats based on suspicious behavior rather than known signatures.
+
+- **🛡️ Smart Whitelisting**  
+  Automatically ignores trusted system paths and common applications to reduce false positives.
+
+- **📡 Network Monitoring**  
+  Watches for active `inet` (internet) socket connections from background processes.
+
+- **🛑 Integrated Kill Switch**  
+  Instantly terminate suspicious processes directly from the dashboard.
+
+- **💻 Terminal Dashboard**  
+  Clean, color-coded, real-time monitoring interface.
 
 ---
 
 ## 🧠 How It Works
 
-PySentry operates on a strictly defined set of rules to filter noise and highlight danger:
+PySentry follows a rule-based detection pipeline:
 
-1.  **Scan:** It iterates through all active system processes (PIDs).
-2.  **Filter:** It compares processes against a `SAFE_PATHS` whitelist (System32, Program Files, etc.) and `IGNORE_PIDS` (System Idle).
-3.  **Analyze:** It checks for "Script Engine" signatures (Python, PowerShell, CMD) and active network connections.
-4.  **Flag:**
-    * **🔴 HIGH RISK:** A script engine is active AND has an established network connection.
-    * **🟡 MEDIUM RISK:** A script engine is active in the background (potential local logger).
+1. **Scan** – Iterates through all running system processes (PIDs).
+2. **Filter** – Excludes safe system paths (`SAFE_PATHS`) and ignored PIDs.
+3. **Analyze** – Checks for script engines (Python, PowerShell, CMD) and active network connections.
+4. **Flag**
+   - **🔴 HIGH RISK**: Script engine + active internet connection
+   - **🟡 MEDIUM RISK**: Script engine running silently in background
 
 ---
 
 ## 📦 Installation
 
 ### Prerequisites
-* Python 3.6 or higher
-* `pip` (Python Package Manager)
+- Python 3.6+
+- `pip`
 
 ### Setup
-1.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/YOUR_USERNAME/PySentry.git](https://github.com/YOUR_USERNAME/PySentry.git)
-    cd PySentry
-    ```
 
-2.  **Install dependencies:**
-    PySentry relies on `psutil` for low-level system access.
-    ```bash
-    pip install -r requirements.txt
-    ```
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/BGx-11/PySentry.git
+   cd PySentry
+Install dependencies
 
----
+bash
+Copy code
+pip install -r requirements.txt
+🛠️ Usage
+1. Run the Monitor (Defense)
+⚠️ Administrator / root privileges are recommended for full visibility.
 
-## 🛠️ Usage
+Windows
 
-### 1. Run the Monitor (Defense)
-Start the detection engine. You must run this with Administrator privileges to scan all processes effectively.
-
-**Windows:**
-```powershell
+powershell
+Copy code
 python pysentry.py
-(Right-click your terminal and select "Run as Administrator" for best results)
+(Run terminal as Administrator)
 
-Linux/macOS:
+Linux / macOS
 
-Bash
-
+bash
+Copy code
 sudo python3 pysentry.py
 2. Run the Simulator (Test)
-To verify that PySentry is working, use the included Safe Simulator. This script mimics the behavior of a malware beacon (connecting to a public DNS) to test the detector.
+A safe simulator is included to validate detection.
 
-Open a new terminal window (separate from the detector).
+Open a new terminal window
 
-Run the simulator:
+Run:
 
-Bash
-
+bash
+Copy code
 python simulation_tool.py
-Check your PySentry window. You should immediately see a 🔴 HIGH RISK alert for the simulation_tool.py process.
+PySentry should instantly show a 🔴 HIGH RISK alert.
 
-Use the PySentry input prompt to kill the simulator PID.
+Use the PySentry prompt to kill the simulator PID.
 
 📂 Project Structure
-Plaintext
-
+text
+Copy code
 PySentry/
 │
-├── pysentry.py          # MAIN TOOL: The detection engine and dashboard
-├── simulation_tool.py   # TEST TOOL: Safely mimics malware behavior
-├── requirements.txt     # Dependencies list (psutil)
+├── pysentry.py          # Main detection engine + dashboard
+├── simulation_tool.py   # Safe malware behavior simulator
+├── requirements.txt     # Dependencies (psutil)
 └── README.md            # Documentation
 ⚙️ Configuration
-You can customize the detection sensitivity by editing the pysentry.py file directly:
+Edit pysentry.py to fine-tune detection:
 
-SAFE_PATHS: Add paths here to whitelist trusted applications that are triggering false positives.
-
-Python
-
+Whitelist Trusted Paths
+python
+Copy code
 SAFE_PATHS = [
     r"C:\Windows\System32",
     r"C:\Program Files\NVIDIA Corporation",
     "TrustedApp.exe"
 ]
-SCRIPT_ENGINES: Add other interpreters you want to monitor (e.g., ruby, perl, java) to the list in pysentry.py.
+Monitor Additional Script Engines
+Add interpreters like ruby, perl, or java to the SCRIPT_ENGINES list.
 
 ⚠️ Disclaimer
-THIS SOFTWARE IS FOR EDUCATIONAL AND DEFENSIVE PURPOSES ONLY.
+FOR EDUCATIONAL AND DEFENSIVE PURPOSES ONLY
 
-Do not use the simulator code on networks or systems you do not own.
+Do not run the simulator on systems you do not own
 
-The authors are not responsible for any damage caused by the misuse of this tool.
+The author is not responsible for misuse
 
-Always test security tools in a controlled environment (Virtual Machine) before using them on critical systems.
+Always test security tools in a controlled environment (VM recommended)
 
 📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License.
 
-<p align="center"> Developed by <strong>BGx</strong> (Devansh Agarwal)
-
-
-<em>Cybersecurity Enthusiast & Developer</em> </p>
+<p align="center"> <strong>Developed by BGx (Devansh Agarwal)</strong><br> <em>Cybersecurity Enthusiast & Developer</em> </p> ```
