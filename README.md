@@ -66,7 +66,7 @@ PySentry follows a rule-based detection pipeline:
    ```bash
    git clone https://github.com/BGx-11/PySentry.git
    cd PySentry
-```
+   ```
 
 2. **Install dependencies**
 
@@ -166,5 +166,5 @@ This project is licensed under the **MIT License**.
 <strong>Developed by BGx (Devansh Agarwal)</strong><br>
 <em>Cybersecurity Enthusiast & Developer</em>
 </p>
-```
+
 
