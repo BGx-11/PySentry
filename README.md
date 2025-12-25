@@ -5,7 +5,8 @@
 ![Status](https://img.shields.io/badge/Status-Active-success)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-lightgrey)
 
-**PySentry** is a lightweight, heuristic-based Intrusion Detection System (IDS) written in Python. Unlike traditional antiviruses that rely on static signatures, PySentry analyzes **process behavior in real time** to identify potential threats such as keyloggers, reverse shells, and spyware.
+**PySentry** is a lightweight, heuristic-based Intrusion Detection System (IDS) written in Python.  
+Unlike traditional antiviruses that rely on static signatures, PySentry analyzes **process behavior in real time** to identify potential threats such as keyloggers, reverse shells, and spyware.
 
 ---
 
@@ -48,7 +49,7 @@ PySentry follows a rule-based detection pipeline:
 2. **Filter** – Excludes safe system paths (`SAFE_PATHS`) and ignored PIDs.
 3. **Analyze** – Checks for script engines (Python, PowerShell, CMD) and active network connections.
 4. **Flag**
-   - **🔴 HIGH RISK**: Script engine + active internet connection
+   - **🔴 HIGH RISK**: Script engine + active internet connection  
    - **🟡 MEDIUM RISK**: Script engine running silently in background
 
 ---
@@ -65,74 +66,3 @@ PySentry follows a rule-based detection pipeline:
    ```bash
    git clone https://github.com/BGx-11/PySentry.git
    cd PySentry
-Install dependencies
-
-bash
-Copy code
-pip install -r requirements.txt
-🛠️ Usage
-1. Run the Monitor (Defense)
-⚠️ Administrator / root privileges are recommended for full visibility.
-
-Windows
-
-powershell
-Copy code
-python pysentry.py
-(Run terminal as Administrator)
-
-Linux / macOS
-
-bash
-Copy code
-sudo python3 pysentry.py
-2. Run the Simulator (Test)
-A safe simulator is included to validate detection.
-
-Open a new terminal window
-
-Run:
-
-bash
-Copy code
-python simulation_tool.py
-PySentry should instantly show a 🔴 HIGH RISK alert.
-
-Use the PySentry prompt to kill the simulator PID.
-
-📂 Project Structure
-text
-Copy code
-PySentry/
-│
-├── pysentry.py          # Main detection engine + dashboard
-├── simulation_tool.py   # Safe malware behavior simulator
-├── requirements.txt     # Dependencies (psutil)
-└── README.md            # Documentation
-⚙️ Configuration
-Edit pysentry.py to fine-tune detection:
-
-Whitelist Trusted Paths
-python
-Copy code
-SAFE_PATHS = [
-    r"C:\Windows\System32",
-    r"C:\Program Files\NVIDIA Corporation",
-    "TrustedApp.exe"
-]
-Monitor Additional Script Engines
-Add interpreters like ruby, perl, or java to the SCRIPT_ENGINES list.
-
-⚠️ Disclaimer
-FOR EDUCATIONAL AND DEFENSIVE PURPOSES ONLY
-
-Do not run the simulator on systems you do not own
-
-The author is not responsible for misuse
-
-Always test security tools in a controlled environment (VM recommended)
-
-📄 License
-This project is licensed under the MIT License.
-
-<p align="center"> <strong>Developed by BGx (Devansh Agarwal)</strong><br> <em>Cybersecurity Enthusiast & Developer</em> </p> ```
