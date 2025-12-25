@@ -66,3 +66,105 @@ PySentry follows a rule-based detection pipeline:
    ```bash
    git clone https://github.com/BGx-11/PySentry.git
    cd PySentry
+````
+
+2. **Install dependencies**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+---
+
+## 🛠️ Usage
+
+### 1. Run the Monitor (Defense)
+
+> ⚠️ Administrator / root privileges are recommended for full visibility.
+
+**Windows**
+
+```powershell
+python pysentry.py
+```
+
+*(Run terminal as Administrator)*
+
+**Linux / macOS**
+
+```bash
+sudo python3 pysentry.py
+```
+
+---
+
+### 2. Run the Simulator (Test)
+
+A safe simulator is included to validate detection.
+
+1. Open a **new terminal window**
+2. Run:
+
+   ```bash
+   python simulation_tool.py
+   ```
+3. PySentry should instantly show a **🔴 HIGH RISK** alert.
+4. Use the PySentry prompt to kill the simulator PID.
+
+---
+
+## 📂 Project Structure
+
+```text
+PySentry/
+│
+├── pysentry.py          # Main detection engine + dashboard
+├── simulation_tool.py   # Safe malware behavior simulator
+├── requirements.txt     # Dependencies (psutil)
+└── README.md            # Documentation
+```
+
+---
+
+## ⚙️ Configuration
+
+Edit `pysentry.py` to fine-tune detection.
+
+### Whitelist Trusted Paths
+
+```python
+SAFE_PATHS = [
+    r"C:\Windows\System32",
+    r"C:\Program Files\NVIDIA Corporation",
+    "TrustedApp.exe"
+]
+```
+
+### Monitor Additional Script Engines
+
+Add interpreters like `ruby`, `perl`, or `java` to the `SCRIPT_ENGINES` list.
+
+---
+
+## ⚠️ Disclaimer
+
+**FOR EDUCATIONAL AND DEFENSIVE PURPOSES ONLY**
+
+* Do not run the simulator on systems you do not own
+* The author is not responsible for misuse
+* Always test security tools in a controlled environment (VM recommended)
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+<p align="center">
+<strong>Developed by BGx (Devansh Agarwal)</strong><br>
+<em>Cybersecurity Enthusiast & Developer</em>
+</p>
+```
+
