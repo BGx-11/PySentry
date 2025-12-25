@@ -10,6 +10,17 @@ Unlike traditional antiviruses that rely on static signatures, PySentry analyzes
 
 ---
 
+## ⚠️ Disclaimer
+
+**FOR EDUCATIONAL AND DEFENSIVE PURPOSES ONLY**
+
+* Do not run the simulator on systems you do not own
+* The author is not responsible for misuse
+* Always test security tools in a controlled environment (VM recommended)
+
+---
+
+
 ## 📖 Table of Contents
 - [Features](#-features)
 - [How It Works](#-how-it-works)
